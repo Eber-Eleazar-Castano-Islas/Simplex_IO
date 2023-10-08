@@ -11,9 +11,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.text.DecimalFormat;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.Timer;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -42,7 +44,6 @@ public class mainC extends javax.swing.JFrame {
     private void initComponents() {
 
         mContainer = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         gen_btn = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -61,21 +62,20 @@ public class mainC extends javax.swing.JFrame {
         title_lbl = new javax.swing.JLabel();
         menu_bg = new javax.swing.JLabel();
         main_bg = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        resul_ta = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
         mContainer.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Nota pal Eber (luego lo borras): Tu botón de calcular van a ser los cosos que dicen maximizar y minimizar");
-        mContainer.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 540, 670, 80));
-
         gen_btn.setBackground(new java.awt.Color(255, 255, 252));
         gen_btn.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
         gen_btn.setForeground(new java.awt.Color(153, 102, 255));
         gen_btn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         gen_btn.setText("Generar");
-        gen_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        gen_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         gen_btn.setOpaque(true);
         gen_btn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -87,18 +87,18 @@ public class mainC extends javax.swing.JFrame {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 gen_btnMouseExited(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                gen_btnMousePressed(evt);
+            }
         });
         mContainer.add(gen_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 110, 120, 40));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "x1", "x2", "x3", "x4"
+
             }
         ));
         jTable1.setFocusable(false);
@@ -109,14 +109,14 @@ public class mainC extends javax.swing.JFrame {
         jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
 
-        mContainer.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, 1000, 130));
+        mContainer.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 200, 1000, 220));
 
         exit_btn.setBackground(new java.awt.Color(255, 255, 255));
         exit_btn.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         exit_btn.setForeground(new java.awt.Color(153, 102, 255));
         exit_btn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         exit_btn.setText("X");
-        exit_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        exit_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         exit_btn.setOpaque(true);
         exit_btn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -179,7 +179,7 @@ public class mainC extends javax.swing.JFrame {
         minim_btn.setForeground(new java.awt.Color(255, 255, 255));
         minim_btn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         minim_btn.setText("Minimizar");
-        minim_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        minim_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         minim_btn.setOpaque(true);
         minim_btn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -199,7 +199,7 @@ public class mainC extends javax.swing.JFrame {
         maxim_btn.setForeground(new java.awt.Color(255, 255, 255));
         maxim_btn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         maxim_btn.setText("Maximizar");
-        maxim_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        maxim_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         maxim_btn.setOpaque(true);
         maxim_btn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -210,6 +210,9 @@ public class mainC extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 maxim_btnMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                maxim_btnMousePressed(evt);
             }
         });
         mContainer.add(maxim_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 181, 210, 50));
@@ -253,6 +256,12 @@ public class mainC extends javax.swing.JFrame {
         main_bg.setBackground(new java.awt.Color(250, 250, 252));
         main_bg.setOpaque(true);
         mContainer.add(main_bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 1020, 620));
+
+        resul_ta.setColumns(20);
+        resul_ta.setRows(5);
+        jScrollPane2.setViewportView(resul_ta);
+
+        mContainer.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 440, 1000, 180));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -329,6 +338,39 @@ public class mainC extends javax.swing.JFrame {
     private void gen_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gen_btnMouseClicked
         gen_btn.setEnabled(false);
     }//GEN-LAST:event_gen_btnMouseClicked
+
+    private void gen_btnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gen_btnMousePressed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        int fila = 1 + Integer.parseInt(rest_txt.getText());
+        int columna = Integer.parseInt(var_txt.getText());
+        int columna1 = columna;
+        for (int i = 0; i < columna1; i++) {
+            model.addColumn("x" + (i + 1));
+        }
+        columna = fila + columna;
+        model.setRowCount(fila);
+        model.setColumnCount(columna);
+        for (int j = columna1; j < columna; j++) {
+            jTable1.setValueAt(0, 0, j);
+        }
+        int i1 = 1, j1 = columna1;
+        for (int i = 1; i < fila; i++) {
+            for (int j = columna1; j < columna - 1; j++) {
+                if (i1 == i && j1 == j) {
+                    jTable1.setValueAt(1, i, j);
+                } else {
+                    jTable1.setValueAt(0, i, j);
+                }
+            }
+            i1++;
+            j1++;
+        }
+    }//GEN-LAST:event_gen_btnMousePressed
+
+    private void maxim_btnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maxim_btnMousePressed
+        // TODO add your handling code here:        
+    }//GEN-LAST:event_maxim_btnMousePressed
 
     class ColorTransition {
 
@@ -426,8 +468,8 @@ public class mainC extends javax.swing.JFrame {
     private javax.swing.JPanel dragged_zone;
     private javax.swing.JLabel exit_btn;
     private javax.swing.JLabel gen_btn;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JSeparator js1;
     private javax.swing.JSeparator js2;
@@ -439,6 +481,7 @@ public class mainC extends javax.swing.JFrame {
     private javax.swing.JLabel minim_btn;
     private javax.swing.JLabel rest_lbl;
     private javax.swing.JTextField rest_txt;
+    private javax.swing.JTextArea resul_ta;
     private javax.swing.JLabel sp_bg;
     private javax.swing.JLabel title_lbl;
     private javax.swing.JLabel var_lbl;
