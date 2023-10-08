@@ -26,16 +26,16 @@ public class mainC extends javax.swing.JFrame {
     private int posX;
     private int posY;
     private Desvanecimiento desv;
-    
+
     public mainC() {
         initComponents();
-        desv=new Desvanecimiento();
+        desv = new Desvanecimiento();
         desv.Mostrar(this, 5);
         characterLimit(var_txt);
         characterLimit(rest_txt);
-        jTable1.getTableHeader().setFont(new java.awt.Font("Arial Black",0,14));
+        jTable1.getTableHeader().setFont(new java.awt.Font("Arial Black", 0, 14));
         jTable1.getTableHeader().setOpaque(false);
-        jTable1.getTableHeader().setBackground(new Color(97,66,159));
+        jTable1.getTableHeader().setBackground(new Color(97, 66, 159));
         jTable1.getTableHeader().setForeground(Color.WHITE);
     }
 
@@ -279,11 +279,11 @@ public class mainC extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void gen_btnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gen_btnMouseEntered
-        new ColorTransition(gen_btn,new Color(255,255,252),new Color(153,102,255),new Color(153,102,255),Color.WHITE).execute();
+        new ColorTransition(gen_btn, new Color(255, 255, 252), new Color(153, 102, 255), new Color(153, 102, 255), Color.WHITE).execute();
     }//GEN-LAST:event_gen_btnMouseEntered
 
     private void gen_btnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gen_btnMouseExited
-        new ColorTransition(gen_btn,new Color(153,102,255),new Color(255,255,252),Color.WHITE,new Color(153,102,255)).execute();
+        new ColorTransition(gen_btn, new Color(153, 102, 255), new Color(255, 255, 252), Color.WHITE, new Color(153, 102, 255)).execute();
     }//GEN-LAST:event_gen_btnMouseExited
 
     private void exit_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exit_btnMouseClicked
@@ -304,11 +304,11 @@ public class mainC extends javax.swing.JFrame {
     }//GEN-LAST:event_minim_btnMouseClicked
 
     private void minim_btnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minim_btnMouseEntered
-        new ColorTransition(minim_btn, new Color(97,66,159), new Color(124,96,181), Color.WHITE, Color.WHITE).execute();
+        new ColorTransition(minim_btn, new Color(97, 66, 159), new Color(124, 96, 181), Color.WHITE, Color.WHITE).execute();
     }//GEN-LAST:event_minim_btnMouseEntered
 
     private void minim_btnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minim_btnMouseExited
-        new ColorTransition(minim_btn, new Color(124,96,181),new Color(97,66,159), Color.WHITE, Color.WHITE).execute();
+        new ColorTransition(minim_btn, new Color(124, 96, 181), new Color(97, 66, 159), Color.WHITE, Color.WHITE).execute();
     }//GEN-LAST:event_minim_btnMouseExited
 
     private void maxim_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maxim_btnMouseClicked
@@ -317,11 +317,11 @@ public class mainC extends javax.swing.JFrame {
     }//GEN-LAST:event_maxim_btnMouseClicked
 
     private void maxim_btnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maxim_btnMouseEntered
-        new ColorTransition(maxim_btn, new Color(97,66,159), new Color(124,96,181), Color.WHITE, Color.WHITE).execute();
+        new ColorTransition(maxim_btn, new Color(97, 66, 159), new Color(124, 96, 181), Color.WHITE, Color.WHITE).execute();
     }//GEN-LAST:event_maxim_btnMouseEntered
 
     private void maxim_btnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maxim_btnMouseExited
-        new ColorTransition(maxim_btn, new Color(124,96,181),new Color(97,66,159), Color.WHITE, Color.WHITE).execute();
+        new ColorTransition(maxim_btn, new Color(124, 96, 181), new Color(97, 66, 159), Color.WHITE, Color.WHITE).execute();
     }//GEN-LAST:event_maxim_btnMouseExited
 
     private void dragged_zoneMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dragged_zoneMouseDragged
@@ -349,6 +349,13 @@ public class mainC extends javax.swing.JFrame {
             model.addColumn("x" + (i + 1));
         }
         columna = fila + columna;
+        for (int i = columna1; i < columna; i++) {
+            if (i == columna - 1) {
+                model.addColumn("Res");
+            } else {
+                model.addColumn("s" + (i - columna1 + 1));
+            }
+        }
         model.setRowCount(fila);
         model.setColumnCount(columna);
         for (int j = columna1; j < columna; j++) {
@@ -416,7 +423,7 @@ public class mainC extends javax.swing.JFrame {
             timer.start();
         }
     }
-    
+
     private void characterLimit(JTextField a) {
         a.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
@@ -431,7 +438,7 @@ public class mainC extends javax.swing.JFrame {
             }
         });
     }
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
