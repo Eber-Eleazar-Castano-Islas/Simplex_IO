@@ -15,6 +15,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.text.DecimalFormat;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
@@ -365,37 +366,41 @@ public class mainC extends javax.swing.JFrame {
 
     private void gen_btnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gen_btnMousePressed
         // TODO add your handling code here:
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        int fila = 1 + Integer.parseInt(rest_txt.getText());
-        int columna = Integer.parseInt(var_txt.getText());
-        int columna1 = columna;
-        for (int i = 0; i < columna1; i++) {
-            model.addColumn("x" + (i + 1));
-        }
-        columna = fila + columna;
-        for (int i = columna1; i < columna; i++) {
-            if (i == columna - 1) {
-                model.addColumn("Res");
-            } else {
-                model.addColumn("s" + (i - columna1 + 1));
+        if (!var_txt.getText().isEmpty() && !rest_txt.getText().isEmpty()) {
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            int fila = 1 + Integer.parseInt(rest_txt.getText());
+            int columna = Integer.parseInt(var_txt.getText());
+            int columna1 = columna;
+            for (int i = 0; i < columna1; i++) {
+                model.addColumn("x" + (i + 1));
             }
-        }
-        model.setRowCount(fila);
-        model.setColumnCount(columna);
-        for (int j = columna1; j < columna; j++) {
-            jTable1.setValueAt(0, 0, j);
-        }
-        int i1 = 1, j1 = columna1;
-        for (int i = 1; i < fila; i++) {
-            for (int j = columna1; j < columna - 1; j++) {
-                if (i1 == i && j1 == j) {
-                    jTable1.setValueAt(1, i, j);
+            columna = fila + columna;
+            for (int i = columna1; i < columna; i++) {
+                if (i == columna - 1) {
+                    model.addColumn("Res");
                 } else {
-                    jTable1.setValueAt(0, i, j);
+                    model.addColumn("s" + (i - columna1 + 1));
                 }
             }
-            i1++;
-            j1++;
+            model.setRowCount(fila);
+            model.setColumnCount(columna);
+            for (int j = columna1; j < columna; j++) {
+                jTable1.setValueAt(0, 0, j);
+            }
+            int i1 = 1, j1 = columna1;
+            for (int i = 1; i < fila; i++) {
+                for (int j = columna1; j < columna - 1; j++) {
+                    if (i1 == i && j1 == j) {
+                        jTable1.setValueAt(1, i, j);
+                    } else {
+                        jTable1.setValueAt(0, i, j);
+                    }
+                }
+                i1++;
+                j1++;
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Por favor, complete los campos antes de continuar.");
         }
     }//GEN-LAST:event_gen_btnMousePressed
 
@@ -404,8 +409,8 @@ public class mainC extends javax.swing.JFrame {
         DecimalFormat decimalFormat = new DecimalFormat("0.00");
         int fila = 1 + Integer.parseInt(rest_txt.getText());
         int columna = Integer.parseInt(var_txt.getText());
-        double[][] v = new double[fila][fila + columna];        
-        int holgura = 1;        
+        double[][] v = new double[fila][fila + columna];
+        int holgura = 1;
         for (int i = 0; i < v[0].length - 1; i++) {
             if (i < columna) {
                 resul_ta.append("\t x" + (i + 1));
@@ -413,7 +418,7 @@ public class mainC extends javax.swing.JFrame {
                 resul_ta.append("\t d" + holgura++);
             }
         }
-        resul_ta.append("\t resul\n");        
+        resul_ta.append("\t resul\n");
         for (int i = 0; i < fila; i++) {
             for (int j = 0; j < v[0].length; j++) {
                 v[i][j] = Double.parseDouble(jTable1.getValueAt(i, j).toString());
@@ -491,7 +496,7 @@ public class mainC extends javax.swing.JFrame {
             if (variables[i] != null) {
                 resul_ta.append(variables[i] + " = " + v[i][v[0].length - 1] + "\n");
             }
-        }       
+        }
     }//GEN-LAST:event_maxim_btnMousePressed
 
     private void tuto_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tuto_btnMouseClicked
@@ -502,11 +507,11 @@ public class mainC extends javax.swing.JFrame {
             tutorial.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    tutorialOpen = false; 
+                    tutorialOpen = false;
                     setTutoEnabled(true);
                 }
             });
-            tutorialOpen = true; 
+            tutorialOpen = true;
         }
     }//GEN-LAST:event_tuto_btnMouseClicked
 
@@ -517,12 +522,12 @@ public class mainC extends javax.swing.JFrame {
     private void tuto_btnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tuto_btnMouseExited
         new ColorTransition(tuto_btn, new Color(153, 102, 255), Color.WHITE, Color.WHITE, new Color(153, 102, 255)).execute();
     }//GEN-LAST:event_tuto_btnMouseExited
-    
+
     public void setTutoEnabled(boolean enabled) {
         tuto_btn.setEnabled(enabled);
         tuto_btn.setFocusable(enabled);
     }
-    
+
     class ColorTransition {
 
         private static final int STEPS = 20;
