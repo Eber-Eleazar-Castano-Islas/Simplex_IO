@@ -375,7 +375,98 @@ public class mainC extends javax.swing.JFrame {
     }//GEN-LAST:event_gen_btnMousePressed
 
     private void maxim_btnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maxim_btnMousePressed
-        // AQUÍ LIZ        
+        resul_ta.append("SIMPLEX MAXIMIZACION\n");
+        DecimalFormat decimalFormat = new DecimalFormat("0.00");
+        int fila = 1 + Integer.parseInt(rest_txt.getText());
+        int columna = Integer.parseInt(var_txt.getText());
+        double[][] v = new double[fila][fila + columna];        
+        int holgura = 1;        
+        for (int i = 0; i < v[0].length - 1; i++) {
+            if (i < columna) {
+                resul_ta.append("\t x" + (i + 1));
+            } else {
+                resul_ta.append("\t d" + holgura++);
+            }
+        }
+        resul_ta.append("\t resul\n");        
+        for (int i = 0; i < fila; i++) {
+            for (int j = 0; j < v[0].length; j++) {
+                v[i][j] = Double.parseDouble(jTable1.getValueAt(i, j).toString());
+            }
+        }
+        for (int i = 0; i < fila; i++) {
+            resul_ta.append((i != 0 ? "d" + i : "") + "\t");
+            for (int j = 0; j < v[0].length; j++) {
+                resul_ta.append(decimalFormat.format(v[i][j]) + "\t");
+            }
+            resul_ta.append("\n");
+        }
+        resul_ta.append("\n\n");
+        String[] variables = new String[fila];
+        int[] varColumna = new int[fila];
+        int co = 0;
+        while (co < columna) {
+            int f = 0;
+            int c = 0;
+            double negativo = 0;
+            // Encontrar el coeficiente más negativo
+            for (int i = 0; i < columna; i++) {
+                if (v[0][i] < negativo) {
+                    negativo = v[0][i];
+                    c = i;
+                }
+            }
+            resul_ta.append("EL MAXIMO NEGATIVO ES: " + negativo + "\nla columna es: ");
+            for (int i = 0; i < fila; i++) {
+                resul_ta.append(v[i][c] + "\t");
+            }
+            resul_ta.append("\n\n dividiendo con la columna\n");
+            double menor = Double.MAX_VALUE;
+            //int f = 0;            
+            for (int i = 1; i < fila; i++) {
+                double division = v[i][v[0].length - 1] / v[i][c];
+                resul_ta.append(v[i][v[0].length - 1] + " / " + v[i][c] + " = " + division + "\n");
+
+                if (division < menor) {
+                    menor = division;
+                    f = i;
+                }
+            }
+            resul_ta.append("el menor de la division es: " + menor + "\n");
+            double pivo = v[f][c];
+            resul_ta.append("el pivote es: " + pivo + "\n");
+            for (int i = 0; i < v[0].length; i++) {
+                v[f][i] /= pivo;
+            }
+            variables[f] = "x" + (c + 1);
+            varColumna[f] = c + 1;
+            resul_ta.append("\nproceso de convertir el pivote en 1\n dividiendo toda la fila con el pivote\n");
+            for (int i = 0; i < fila; i++) {
+                if (i != f) {
+                    double guar = -v[i][c];
+                    resul_ta.append("Convertir la columna del pivote en cero en fila " + (i + 1) + "\n\n");
+                    for (int j = 0; j < v[0].length; j++) {
+                        double vaa = v[i][j];
+                        v[i][j] = guar * v[f][j] + v[i][j];
+                        resul_ta.append(guar + "*" + v[f][j] + " + " + vaa + " = " + v[i][j] + "\n");
+                    }
+                }
+            }
+            co = 0;
+            for (int i = 0; i < columna; i++) {
+                if (v[0][i] >= 0) {
+                    co++;
+                }
+            }
+        }
+        resul_ta.append("\n\n");
+        resul_ta.append("RESULTADO\n");
+        resul_ta.append("z = " + v[0][v[0].length - 1] + "\n");
+        for (int i = 1; i < fila; i++) {
+            if (variables[i] != null) {
+                resul_ta.append(variables[i] + " = " + v[i][v[0].length - 1] + "\n");
+            }
+        }       
     }//GEN-LAST:event_maxim_btnMousePressed
 
     class ColorTransition {
