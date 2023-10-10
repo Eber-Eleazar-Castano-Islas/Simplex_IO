@@ -11,6 +11,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.text.DecimalFormat;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -26,6 +28,8 @@ public class mainC extends javax.swing.JFrame {
     private int posX;
     private int posY;
     private Desvanecimiento desv;
+    private tutorial tutorial = null;
+    private boolean tutorialOpen = false;
 
     public mainC() {
         initComponents();
@@ -48,6 +52,7 @@ public class mainC extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         exit_btn = new javax.swing.JLabel();
+        tuto_btn = new javax.swing.JLabel();
         rest_txt = new javax.swing.JTextField();
         js2 = new javax.swing.JSeparator();
         rest_lbl = new javax.swing.JLabel();
@@ -129,6 +134,26 @@ public class mainC extends javax.swing.JFrame {
             }
         });
         mContainer.add(exit_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 0, 40, 40));
+
+        tuto_btn.setBackground(new java.awt.Color(255, 255, 255));
+        tuto_btn.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        tuto_btn.setForeground(new java.awt.Color(153, 102, 255));
+        tuto_btn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tuto_btn.setText("?");
+        tuto_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tuto_btn.setOpaque(true);
+        tuto_btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tuto_btnMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                tuto_btnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                tuto_btnMouseExited(evt);
+            }
+        });
+        mContainer.add(tuto_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 0, 40, 40));
 
         rest_txt.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
         rest_txt.setForeground(new java.awt.Color(255, 255, 255));
@@ -469,6 +494,35 @@ public class mainC extends javax.swing.JFrame {
         }       
     }//GEN-LAST:event_maxim_btnMousePressed
 
+    private void tuto_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tuto_btnMouseClicked
+        if (!tutorialOpen) {
+            setTutoEnabled(false);
+            tutorial = new tutorial();
+            tutorial.setVisible(true);
+            tutorial.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    tutorialOpen = false; 
+                    setTutoEnabled(true);
+                }
+            });
+            tutorialOpen = true; 
+        }
+    }//GEN-LAST:event_tuto_btnMouseClicked
+
+    private void tuto_btnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tuto_btnMouseEntered
+        new ColorTransition(tuto_btn, Color.WHITE, new Color(153, 102, 255), new Color(153, 102, 255), Color.WHITE).execute();
+    }//GEN-LAST:event_tuto_btnMouseEntered
+
+    private void tuto_btnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tuto_btnMouseExited
+        new ColorTransition(tuto_btn, new Color(153, 102, 255), Color.WHITE, Color.WHITE, new Color(153, 102, 255)).execute();
+    }//GEN-LAST:event_tuto_btnMouseExited
+    
+    public void setTutoEnabled(boolean enabled) {
+        tuto_btn.setEnabled(enabled);
+        tuto_btn.setFocusable(enabled);
+    }
+    
     class ColorTransition {
 
         private static final int STEPS = 20;
@@ -581,6 +635,7 @@ public class mainC extends javax.swing.JFrame {
     private javax.swing.JTextArea resul_ta;
     private javax.swing.JLabel sp_bg;
     private javax.swing.JLabel title_lbl;
+    private javax.swing.JLabel tuto_btn;
     private javax.swing.JLabel var_lbl;
     private javax.swing.JTextField var_txt;
     // End of variables declaration//GEN-END:variables
