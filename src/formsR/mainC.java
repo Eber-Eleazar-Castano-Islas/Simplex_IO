@@ -375,7 +375,7 @@ public class mainC extends javax.swing.JFrame {
     }//GEN-LAST:event_gen_btnMousePressed
 
     private void maxim_btnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maxim_btnMousePressed
-        // TODO add your handling code here:        
+        // AQUÍ LIZ        
     }//GEN-LAST:event_maxim_btnMousePressed
 
     class ColorTransition {
