@@ -61,9 +61,9 @@ public class mainC extends javax.swing.JFrame {
         dragged_zone = new javax.swing.JPanel();
         title_lbl = new javax.swing.JLabel();
         menu_bg = new javax.swing.JLabel();
-        main_bg = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         resul_ta = new javax.swing.JTextArea();
+        main_bg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -75,7 +75,7 @@ public class mainC extends javax.swing.JFrame {
         gen_btn.setForeground(new java.awt.Color(153, 102, 255));
         gen_btn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         gen_btn.setText("Generar");
-        gen_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        gen_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         gen_btn.setOpaque(true);
         gen_btn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -101,7 +101,6 @@ public class mainC extends javax.swing.JFrame {
 
             }
         ));
-        jTable1.setFocusable(false);
         jTable1.setIntercellSpacing(new java.awt.Dimension(0, 0));
         jTable1.setRowHeight(25);
         jTable1.setSelectionBackground(new java.awt.Color(176, 169, 230));
@@ -116,7 +115,7 @@ public class mainC extends javax.swing.JFrame {
         exit_btn.setForeground(new java.awt.Color(153, 102, 255));
         exit_btn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         exit_btn.setText("X");
-        exit_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        exit_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         exit_btn.setOpaque(true);
         exit_btn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -179,7 +178,7 @@ public class mainC extends javax.swing.JFrame {
         minim_btn.setForeground(new java.awt.Color(255, 255, 255));
         minim_btn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         minim_btn.setText("Minimizar");
-        minim_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        minim_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         minim_btn.setOpaque(true);
         minim_btn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -199,7 +198,7 @@ public class mainC extends javax.swing.JFrame {
         maxim_btn.setForeground(new java.awt.Color(255, 255, 255));
         maxim_btn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         maxim_btn.setText("Maximizar");
-        maxim_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        maxim_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         maxim_btn.setOpaque(true);
         maxim_btn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -253,15 +252,15 @@ public class mainC extends javax.swing.JFrame {
         menu_bg.setOpaque(true);
         mContainer.add(menu_bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 620));
 
-        main_bg.setBackground(new java.awt.Color(250, 250, 252));
-        main_bg.setOpaque(true);
-        mContainer.add(main_bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 1020, 620));
-
         resul_ta.setColumns(20);
         resul_ta.setRows(5);
         jScrollPane2.setViewportView(resul_ta);
 
-        mContainer.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 440, 1000, 180));
+        mContainer.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 430, 1000, 180));
+
+        main_bg.setBackground(new java.awt.Color(250, 250, 252));
+        main_bg.setOpaque(true);
+        mContainer.add(main_bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1230, 620));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
